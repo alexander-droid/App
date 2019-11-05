@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.commit
+import com.alex.droid.dev.app.MainActivity
 
 import com.alex.droid.dev.app.R
+import com.alex.droid.dev.app.model.routes.ChatRoute
 import com.alex.droid.dev.app.ui.chat.ChatFragment
 import kotlinx.android.synthetic.main.fragment_contacts.*
 
@@ -26,10 +28,7 @@ class ContactsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         btn.setOnClickListener {
-            activity?.supportFragmentManager?.commit {
-                addToBackStack("main")
-                replace(R.id.container, ChatFragment(), ChatFragment::class.simpleName)
-            }
+            (activity as MainActivity).router.replaceWithStack(ChatRoute, null, "main")
         }
     }
 }

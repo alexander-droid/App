@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.commit
+import com.alex.droid.dev.app.MainActivity
 
 import com.alex.droid.dev.app.R
+import com.alex.droid.dev.app.model.routes.PostRoute
 import com.alex.droid.dev.app.ui.post.PostFragment
 import kotlinx.android.synthetic.main.fragment_feed.*
 
@@ -26,10 +28,7 @@ class FeedFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         btn.setOnClickListener {
-            activity?.supportFragmentManager?.commit {
-                addToBackStack("main")
-                replace(R.id.container, PostFragment(), PostFragment::class.simpleName)
-            }
+            (activity as MainActivity).router.replaceWithStack(PostRoute, null, "main")
         }
     }
 }

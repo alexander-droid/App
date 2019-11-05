@@ -5,7 +5,6 @@ plugins {
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
-    id("kotlin-android-extensions")
 }
 
 android {
@@ -36,12 +35,9 @@ android {
     }
 }
 
-androidExtensions {
-    isExperimental = true
-}
-
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
+    implementation(project(":router"))
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:${KotlinCompilerVersion.VERSION}")
     implementation("org.jetbrains.kotlin:kotlin-reflect:1.3.50")
@@ -52,7 +48,7 @@ dependencies {
     implementation("androidx.fragment:fragment-ktx:1.2.0-rc01")
     implementation("com.google.android.material:material:1.2.0-alpha01")
 
-    implementation("io.reactivex.rxjava2:rxjava:2.2.10")
+    implementation("io.reactivex.rxjava2:rxjava:2.2.13")
     implementation("io.reactivex.rxjava2:rxandroid:2.1.1")
 
     implementation("com.jakewharton.timber:timber:4.7.1")
