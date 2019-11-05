@@ -1,19 +1,21 @@
 package com.alex.droid.dev.app
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import com.alex.droid.dev.app.base.BaseActivity
+import com.alex.droid.dev.app.base.EmptyViewModel
 import com.alex.droid.dev.app.model.routes.*
 import com.alex.droid.dev.app.ui.chat.ChatFragment
 import com.alex.droid.dev.app.ui.contacts.ContactsFragment
 import com.alex.droid.dev.app.ui.feed.FeedFragment
 import com.alex.droid.dev.app.ui.post.PostFragment
 import com.alex.droid.dev.app.ui.search.SearchFragment
-import com.alex.droid.dev.router.BasicRouter
+import com.alex.droid.dev.router.EmptyRoute
+import com.alex.droid.dev.router.RoutesBuilder
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity<EmptyViewModel, EmptyRoute>() {
 
-    val router = BasicRouter(this, R.id.container) {
+    override fun buildRoutes(): RoutesBuilder =  {
         route(FeedRoute::class to FeedFragment::class)
         route(ContactsRoute::class to ContactsFragment::class)
         route(SearchRoute::class to SearchFragment::class)
