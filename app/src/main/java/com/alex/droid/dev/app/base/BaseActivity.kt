@@ -1,7 +1,6 @@
 package com.alex.droid.dev.app.base
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 import com.alex.droid.dev.app.R
 import com.alex.droid.dev.router.*

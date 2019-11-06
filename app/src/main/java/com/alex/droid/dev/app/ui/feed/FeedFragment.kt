@@ -1,34 +1,20 @@
 package com.alex.droid.dev.app.ui.feed
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.commit
-import com.alex.droid.dev.app.MainActivity
-
 import com.alex.droid.dev.app.R
-import com.alex.droid.dev.app.model.routes.PostRoute
-import com.alex.droid.dev.app.ui.post.PostFragment
+import com.alex.droid.dev.app.base.BaseFragment
+import com.alex.droid.dev.app.model.post.Post
+import com.alex.droid.dev.app.model.routes.FeedRoute
 import kotlinx.android.synthetic.main.fragment_feed.*
 
-/**
- * A simple [Fragment] subclass.
- */
-class FeedFragment : Fragment() {
+class FeedFragment : BaseFragment<FeedViewModel, FeedRoute>() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_feed, container, false)
-    }
+    override fun getLayoutRes() = R.layout.fragment_feed
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         btn.setOnClickListener {
-            (activity as MainActivity).router.replaceWithStack(PostRoute, null, "main")
+            viewModel.onPostClicked(Post("id", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat"))
         }
     }
 }

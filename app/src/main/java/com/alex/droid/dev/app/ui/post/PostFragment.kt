@@ -7,18 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.alex.droid.dev.app.R
+import com.alex.droid.dev.app.base.BaseFragment
+import com.alex.droid.dev.app.model.routes.PostRoute
+import kotlinx.android.synthetic.main.fragment_post.*
 
-/**
- * A simple [Fragment] subclass.
- */
-class PostFragment : Fragment() {
+class PostFragment : BaseFragment<PostViewModel, PostRoute>() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_post, container, false)
+    override fun getLayoutRes() = R.layout.fragment_post
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        subscribe(viewModel.postLiveData) {
+            content_tv.text = it?.text
+        }
     }
-
 }

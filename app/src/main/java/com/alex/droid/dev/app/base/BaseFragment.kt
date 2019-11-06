@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.CallSuper
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import com.alex.droid.dev.router.Route
 import com.alex.droid.dev.router.getRoute
 import org.koin.android.ext.android.getKoin
@@ -60,5 +62,9 @@ abstract class BaseFragment<VM : BaseViewModel<R>, R: Route> : Fragment() {
     protected fun getViewModelKClass(): KClass<VM> {
         val actualClass = (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<VM>
         return actualClass.kotlin
+    }
+
+    protected fun <T> subscribe(liveData: LiveData<T>, onNext: (t: T?) -> Unit) {
+        liveData.observe(viewLifecycleOwner, Observer { onNext(it) })
     }
 }

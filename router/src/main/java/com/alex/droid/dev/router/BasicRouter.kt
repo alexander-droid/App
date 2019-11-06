@@ -1,5 +1,6 @@
 package com.alex.droid.dev.router
 
+import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.commit
 
@@ -11,7 +12,9 @@ class BasicRouter(
 
     override fun replace(route: Route, tag: String?) {
         val clazz = routes[route.javaClass]!!
-        val fragment = fragmentManager.fragmentFactory.instantiate(activity.classLoader, clazz.name)
+        val fragment = fragmentManager.fragmentFactory.instantiate(activity.classLoader, clazz.name).apply {
+            arguments = Bundle().apply { putParcelable(KEY_ROUTE, route) }
+        }
         val fragmentTag = tag ?: clazz.simpleName
 
         fragmentManager.commit {
@@ -21,7 +24,9 @@ class BasicRouter(
 
     override fun replaceWithStack(route: Route, tag: String?, stackName: String?) {
         val clazz = routes[route.javaClass]!!
-        val fragment = fragmentManager.fragmentFactory.instantiate(activity.classLoader, clazz.name)
+        val fragment = fragmentManager.fragmentFactory.instantiate(activity.classLoader, clazz.name).apply {
+            arguments = Bundle().apply { putParcelable(KEY_ROUTE, route) }
+        }
         val fragmentTag = tag ?: clazz.simpleName
 
         fragmentManager.commit {
