@@ -17,7 +17,7 @@ abstract class Router(
 
     protected val fragmentManager: FragmentManager = activity.supportFragmentManager
 
-    protected val routes = HashMap<Class<out Route>, Class<out Fragment>>()
+    protected val routes = HashMap<Class<Route>, Class<Fragment>>()
 
     init {
         builder(Builder())
@@ -31,16 +31,16 @@ abstract class Router(
         fragmentManager.popBackStack()
     }
 
-    abstract fun replace(route: Route, tag: String? = null)
-    abstract fun replaceWithStack(route: Route, tag: String? = null, stackName: String? = null)
+    abstract fun replace(route: Route)
+    abstract fun replaceWithStack(route: Route, stackName: String? = null)
 
     inner class Builder {
 
-        fun route(routeClass: KClass<out Route>, fragmentClass: KClass<out Fragment>) {
+        fun route(routeClass: KClass<Route>, fragmentClass: KClass<Fragment>) {
             routes[routeClass.java] = fragmentClass.java
         }
 
-        fun route(pair: Pair<KClass<out Route>, KClass<out Fragment>>) {
+        fun route(pair: Pair<KClass<Route>, KClass<Fragment>>) {
             routes[pair.first.java] = pair.second.java
         }
     }

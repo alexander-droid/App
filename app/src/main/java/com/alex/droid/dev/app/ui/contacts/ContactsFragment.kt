@@ -28,7 +28,7 @@ class ContactsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         btn.setOnClickListener {
-            (activity as MainActivity).router.replaceWithStack(ChatRoute, null, "main")
+            (activity as MainActivity).router.replaceWithStack(ChatRoute, "main")
         }
     }
 }

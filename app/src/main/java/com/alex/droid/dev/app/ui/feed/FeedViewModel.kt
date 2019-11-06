@@ -17,6 +17,6 @@ class FeedViewModelImpl(): FeedViewModel() {
     }
 
     override fun onPostClicked(post: Post) {
-        router.replaceWithStack(PostRoute(post = post), null, "main")
+        router.replaceWithStack(PostRoute(post = post),  "main")
     }
 }
