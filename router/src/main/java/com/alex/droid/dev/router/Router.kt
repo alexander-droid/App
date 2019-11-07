@@ -17,7 +17,7 @@ abstract class Router(
 
     protected val fragmentManager: FragmentManager = activity.supportFragmentManager
 
-    protected val routes = HashMap<Class<Route>, Class<Fragment>>()
+    protected val routes = HashMap<Class<out Route>, Class<out Fragment>>()
 
     init {
         builder(Builder())
@@ -36,11 +36,11 @@ abstract class Router(
 
     inner class Builder {
 
-        fun route(routeClass: KClass<Route>, fragmentClass: KClass<Fragment>) {
+        fun route(routeClass: KClass<out Route>, fragmentClass: KClass<out Fragment>) {
             routes[routeClass.java] = fragmentClass.java
         }
 
-        fun route(pair: Pair<KClass<Route>, KClass<Fragment>>) {
+        fun route(pair: Pair<KClass<out Route>, KClass<out Fragment>>) {
             routes[pair.first.java] = pair.second.java
         }
     }
