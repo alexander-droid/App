@@ -1,21 +1,35 @@
 package com.alex.droid.dev.app.model.entity.post
 
-import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.Index
-import androidx.room.PrimaryKey
+import android.os.Parcelable
+import androidx.room.*
+import com.alex.droid.dev.app.model.entity.user.UserEntity
+import kotlinx.android.parcel.Parcelize
 
 @Entity(tableName = "comments", indices = [Index(value = ["commentId"], unique = true)])
+@Parcelize
 data class CommentEntity(
     @PrimaryKey
-    val commentId: String,
-    val commentText: String?,
+    @ColumnInfo(name = "commentId")
+    val id: String,
+
+    @ColumnInfo(name = "commentMessage")
+    val message: String?,
 
     @ForeignKey(
         entity = PostEntity::class,
-        parentColumns = ["commentId"],
-        childColumns = ["postId"],
+        parentColumns = ["postId"],
+        childColumns = ["commentPostId"],
         onDelete = ForeignKey.CASCADE
     )
-    val commentPostId: String
-)
+    @ColumnInfo(name = "commentPostId")
+    val postId: String,
+
+    @ForeignKey(
+        entity = UserEntity::class,
+        parentColumns = ["userId"],
+        childColumns = ["commentUserId"],
+        onDelete = ForeignKey.CASCADE
+    )
+    @ColumnInfo(name = "commentUserId")
+    val userId: String
+): Parcelable

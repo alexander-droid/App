@@ -8,7 +8,7 @@ import com.alex.droid.dev.app.model.entity.user.UserEntity
 
 @Database(
     entities = [PostEntity::class, UserEntity::class, CommentEntity::class],
-    version = 2,
+    version = 11,
     exportSchema = false
 )
 abstract class DataBase : RoomDatabase() {

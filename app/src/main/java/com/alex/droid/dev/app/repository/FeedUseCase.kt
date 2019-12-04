@@ -1,17 +1,13 @@
 package com.alex.droid.dev.app.repository
 
-import androidx.lifecycle.MutableLiveData
-import androidx.paging.PagedList
 import com.alex.droid.dev.app.api.FeedApi
 import com.alex.droid.dev.app.db.FeedDao
 import com.alex.droid.dev.app.model.actions.ActionFeed
-import com.alex.droid.dev.app.model.data.post.Post
-import com.alex.droid.dev.app.model.entity.post.PostEntity
-import com.alex.droid.dev.app.paging.NetworkState
+import com.alex.droid.dev.app.model.entity.PostData
 import com.alex.droid.dev.app.paging.PagingObserver
 import kotlinx.coroutines.flow.Flow
 
-abstract class FeedUseCase : BaseUseCase<ActionFeed, Flow<List<PostEntity>>>() {
+abstract class FeedUseCase : BaseUseCase<ActionFeed, Flow<List<PostData>>>() {
 
 }
 
@@ -20,8 +16,8 @@ class FeedUseCaseImpl(
     private val feedDao: FeedDao
 ): FeedUseCase() {
 
-    override fun execute(action: ActionFeed): Flow<List<PostEntity>> {
-        return feedDao.posts()
+    override fun execute(action: ActionFeed): Flow<List<PostData>> {
+        return feedDao.postsAndUsers()
     }
 
 }

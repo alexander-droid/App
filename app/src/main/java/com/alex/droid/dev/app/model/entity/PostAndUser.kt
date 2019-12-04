@@ -5,7 +5,7 @@ import androidx.room.Relation
 import com.alex.droid.dev.app.model.entity.post.PostEntity
 import com.alex.droid.dev.app.model.entity.user.UserEntity
 
-data class PostAndUserEntities(
+data class PostData(
 
     @Embedded
     val post: PostEntity?,

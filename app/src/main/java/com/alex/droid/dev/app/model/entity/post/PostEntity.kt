@@ -1,26 +1,40 @@
 package com.alex.droid.dev.app.model.entity.post
 
+import android.os.Parcelable
 import androidx.room.*
 import com.alex.droid.dev.app.model.entity.user.UserEntity
 import com.alex.droid.dev.app.utils.DateUtils
+import kotlinx.android.parcel.Parcelize
 
 @Entity(tableName = "posts", indices = [Index(value = ["postId"], unique = true)])
+@Parcelize
 data class PostEntity(
 
     @PrimaryKey
     @ColumnInfo(name = "postId")
-    val postId: String,
-    val postMessage: String?,
-    val postVideo: String?,
-    val postImage: String?,
-    val postDate: String = DateUtils.currentTimeString(),
+    val id: String,
+
+    @ColumnInfo(name = "postMessage")
+    val message: String?,
+
+    @ColumnInfo(name = "postVideo")
+    val video: String?,
+
+    @ColumnInfo(name = "postImage")
+    val image: String?,
+
+    @ColumnInfo(name = "postDate")
+    val date: String = DateUtils.currentTimeString(),
 
     @ForeignKey(
         entity = UserEntity::class,
-        parentColumns = ["postId"],
-        childColumns = ["userId"],
+        parentColumns = ["userId"],
+        childColumns = ["postUserId"],
         onDelete = ForeignKey.CASCADE
     )
-    val postUserId: String,
-    val postIsLiked: Boolean = false
-)
+    @ColumnInfo(name = "postUserId")
+    val userId: String,
+
+    @ColumnInfo(name = "isPostLiked")
+    val isLiked: Boolean = false
+): Parcelable

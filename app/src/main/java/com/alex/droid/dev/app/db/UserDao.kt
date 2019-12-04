@@ -8,10 +8,10 @@ import kotlinx.coroutines.flow.Flow
 interface UserDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(users: List<UserEntity>)
+    suspend fun insert(users: List<UserEntity>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(user: UserEntity)
+    suspend fun insert(user: UserEntity)
 
     @Query("SELECT * FROM users")
     fun users(): Flow<List<UserEntity>>
@@ -20,5 +20,5 @@ interface UserDao {
     fun user(id: String): Flow<UserEntity>
 
     @Delete(entity = UserEntity::class)
-    fun delete(id: String)
+    suspend fun delete(id: String)
 }

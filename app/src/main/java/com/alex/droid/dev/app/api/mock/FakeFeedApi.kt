@@ -1,9 +1,9 @@
 package com.alex.droid.dev.app.api.mock
 
 import com.alex.droid.dev.app.api.FeedApi
-import com.alex.droid.dev.app.model.data.post.Comment
-import com.alex.droid.dev.app.model.data.post.Post
-import com.alex.droid.dev.app.model.data.user.User
+import com.alex.droid.dev.app.model.entity.post.CommentEntity
+import com.alex.droid.dev.app.model.entity.post.PostEntity
+import com.alex.droid.dev.app.model.entity.user.UserEntity
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import java.util.*
@@ -11,36 +11,47 @@ import java.util.*
 class FakeFeedApi : FeedApi {
 
     companion object {
-        fun generatePosts(count: Int = 100): MutableList<Post> {
-            return mutableListOf<Post>().apply {
-                for (i in 0 until count) {
-                    add(Post(
-                        id = UUID.randomUUID().toString(),
-                        text = "$i. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
-                        video = getRandomVideoUrl(),
-                        image = getRandomImageUrl(),
-                        isLiked = false,
-                        date = "2019-10-28 14:15:45.709",
-                        user = User(
-                            id = UUID.randomUUID().toString(),
-                            name = "$i Name",
-                            avatar = getRandomAvatarUrl()
-                        )
-                    ))
-                }
+
+        val posts by lazy {
+
+            MutableList(10) { i ->
+                PostEntity(
+                    id = "ID-$i",
+                    message = "$i. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+                    video = getRandomVideoUrl(),
+                    image = getRandomImageUrl(),
+                    isLiked = false,
+                    userId = users[Random().nextInt(users.size)].id
+                )
             }
         }
 
-        private fun getComments(): MutableList<Comment> {
-            return MutableList(20) {
-                Comment(
-                    id = UUID.randomUUID().toString(),
-                    message = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
-                    user = User(
-                        id = UUID.randomUUID().toString(),
-                        name = "$it Name",
+        val users by lazy {
+            mutableListOf<UserEntity>().apply {
+                add(
+                    UserEntity(
+                        id = "ID-1",
+                        name = "John Smith",
                         avatar = getRandomAvatarUrl()
                     )
+                )
+                add(
+                    UserEntity(
+                        id = "ID-2",
+                        name = "Jane Smith",
+                        avatar = getRandomAvatarUrl()
+                    )
+                )
+            }
+        }
+
+        fun getComments(userId: String, postId: String): MutableList<CommentEntity> {
+            return MutableList(20) { i ->
+                CommentEntity(
+                    id = "ID-$i-$postId-$userId",
+                    message = "$i - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
+                    userId = userId,
+                    postId = postId
                 )
             }
         }
@@ -85,18 +96,14 @@ class FakeFeedApi : FeedApi {
         )
     }
 
-    private val feed by lazy {
-        generatePosts()
-    }
-
-    override fun feedPage(filter: String?, lastId: String?): Single<List<Post>> {
-        return Single.fromCallable<List<Post>> {
-            val page = mutableListOf<Post>()
+    override fun feedPage(filter: String?, lastId: String?): Single<List<PostEntity>> {
+        return Single.fromCallable<List<PostEntity>> {
+            val page = mutableListOf<PostEntity>()
 
             var lastIdFound = lastId == null
             var itemsQueried = 0
             run {
-                feed.forEach {
+                posts.forEach {
                     if (lastIdFound) {
                         page.add(it)
                         itemsQueried += 1

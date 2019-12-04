@@ -18,7 +18,7 @@ class PostFragment : BaseFragment<PostViewModel, PostRoute>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         subscribe(viewModel.postLiveData) {
-            content_tv.text = it?.text
+            content_tv.text = it?.message
         }
     }
 }

@@ -11,6 +11,8 @@ import com.alex.droid.dev.app.ui.feed.FeedViewModel
 import com.alex.droid.dev.app.ui.feed.FeedViewModelImpl
 import com.alex.droid.dev.app.ui.post.PostViewModel
 import com.alex.droid.dev.app.ui.post.PostViewModelImpl
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.asExecutor
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import java.util.concurrent.Executors
@@ -25,7 +27,8 @@ private val appModule = module {
     single {
         Room.databaseBuilder(get(), DataBase::class.java, "app.db")
             .fallbackToDestructiveMigration()
-            .setQueryExecutor(Executors.newSingleThreadExecutor())
+//            .setQueryExecutor(Dispatchers.IO.asExecutor())
+//            .setTransactionExecutor(Dispatchers.IO.asExecutor())
             .build()
     }
 }

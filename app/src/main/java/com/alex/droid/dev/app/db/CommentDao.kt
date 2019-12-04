@@ -7,10 +7,10 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface CommentDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(users: List<CommentEntity>)
+    suspend fun insert(users: List<CommentEntity>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(user: CommentEntity)
+    suspend fun insert(user: CommentEntity)
 
     @Query("SELECT * FROM comments")
     fun users(): Flow<List<CommentEntity>>
@@ -19,5 +19,5 @@ interface CommentDao {
     fun user(id: String): Flow<CommentEntity>
 
     @Delete(entity = CommentEntity::class)
-    fun delete(id: String)
+    suspend fun delete(id: String)
 }
