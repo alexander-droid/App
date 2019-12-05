@@ -26,7 +26,7 @@ interface FeedDao {
     @Query("SELECT * FROM posts WHERE postId = :id")
     fun post(id: String): Flow<PostEntity>
 
-    @Delete(entity = PostEntity::class)
+    @Query("DELETE FROM posts WHERE postId = :id")
     suspend fun delete(id: String)
 
     @Query("SELECT * FROM posts")

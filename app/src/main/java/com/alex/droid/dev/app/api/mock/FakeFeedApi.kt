@@ -14,7 +14,7 @@ class FakeFeedApi : FeedApi {
 
         val posts by lazy {
 
-            MutableList(10) { i ->
+            MutableList(100) { i ->
                 PostEntity(
                     id = "ID-$i",
                     message = "$i. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
@@ -46,7 +46,7 @@ class FakeFeedApi : FeedApi {
         }
 
         fun getComments(userId: String, postId: String): MutableList<CommentEntity> {
-            return MutableList(20) { i ->
+            return MutableList(50) { i ->
                 CommentEntity(
                     id = "ID-$i-$postId-$userId",
                     message = "$i - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",

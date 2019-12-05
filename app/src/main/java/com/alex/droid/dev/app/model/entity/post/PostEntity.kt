@@ -6,7 +6,17 @@ import com.alex.droid.dev.app.model.entity.user.UserEntity
 import com.alex.droid.dev.app.utils.DateUtils
 import kotlinx.android.parcel.Parcelize
 
-@Entity(tableName = "posts", indices = [Index(value = ["postId"], unique = true)])
+@Entity(
+    tableName = "posts",
+    foreignKeys = [
+        ForeignKey(
+            entity = UserEntity::class,
+            parentColumns = ["userId"],
+            childColumns = ["postUserId"],
+            onDelete = ForeignKey.CASCADE
+        )
+    ],
+    indices = [Index(value = ["postId"], unique = true)])
 @Parcelize
 data class PostEntity(
 
@@ -26,12 +36,6 @@ data class PostEntity(
     @ColumnInfo(name = "postDate")
     val date: String = DateUtils.currentTimeString(),
 
-    @ForeignKey(
-        entity = UserEntity::class,
-        parentColumns = ["userId"],
-        childColumns = ["postUserId"],
-        onDelete = ForeignKey.CASCADE
-    )
     @ColumnInfo(name = "postUserId")
     val userId: String,
 

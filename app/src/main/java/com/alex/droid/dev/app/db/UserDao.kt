@@ -19,6 +19,6 @@ interface UserDao {
     @Query("SELECT * FROM users WHERE userId = :id")
     fun user(id: String): Flow<UserEntity>
 
-    @Delete(entity = UserEntity::class)
+    @Query("DELETE FROM users WHERE userId = :id")
     suspend fun delete(id: String)
 }

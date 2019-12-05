@@ -18,6 +18,6 @@ interface CommentDao {
     @Query("SELECT * FROM comments WHERE commentId = :id")
     fun user(id: String): Flow<CommentEntity>
 
-    @Delete(entity = CommentEntity::class)
+    @Query("DELETE FROM comments WHERE commentId = :id")
     suspend fun delete(id: String)
 }

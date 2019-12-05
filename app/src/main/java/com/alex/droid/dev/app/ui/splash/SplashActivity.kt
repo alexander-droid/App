@@ -32,12 +32,13 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MaterialTheme {
-                Greeting("Android")
-            }
+            Greeting("Android")
         }
 
-        lifecycleScope.launch {
+        startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+        finish()
+
+        /*lifecycleScope.launch {
             val userList = FakeFeedApi.users
             val postList = FakeFeedApi.posts
 
@@ -47,27 +48,29 @@ class SplashActivity : AppCompatActivity() {
                 commentList.addAll(FakeFeedApi.getComments(userId = userList[Random().nextInt(userList.size)].id, postId = post.id))
             }
 
-            userDao.insert(userList)
-            feedDao.insert(postList)
-            commentDao.insert(commentList)
+//            feedDao.delete("ID-0")
+
+//            userDao.insert(userList)
+//            feedDao.insert(postList)
+//            commentDao.insert(commentList)
 
             startActivity(Intent(this@SplashActivity, MainActivity::class.java))
             finish()
-        }
+        }*/
     }
 }
 
 @Composable
 fun Greeting(name: String) {
-    Text(text = "Hello $name!")
+    MaterialTheme {
+        Wrap(Alignment.Center) {
+            Text(text = "$name!")
+        }
+    }
 }
 
 @Preview
 @Composable
 fun DefaultPreview() {
-    MaterialTheme {
-        Wrap(Alignment.Center) {
-            Greeting("Android")
-        }
-    }
+    Greeting("Android")
 }
