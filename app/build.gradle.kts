@@ -60,6 +60,9 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.2.0-rc02")
     implementation("com.google.android.material:material:1.2.0-alpha02")
 
+    implementation("com.squareup.retrofit2:retrofit:2.6.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.5.0")
+    implementation("com.squareup.retrofit2:adapter-rxjava2:2.5.0")
     implementation("io.reactivex.rxjava2:rxjava:2.2.13")
     implementation("io.reactivex.rxjava2:rxandroid:2.1.1")
 
@@ -70,6 +73,9 @@ dependencies {
 
     implementation("android.arch.lifecycle:extensions:1.1.1")
 
+    implementation("com.github.ihsanbal:LoggingInterceptor:3.0.0") {
+        exclude("org.json', module: 'json")
+    }
     implementation("com.github.bumptech.glide:glide:4.9.0") {
         exclude("com.android.support")
     }

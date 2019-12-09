@@ -64,7 +64,15 @@ abstract class BaseFragment<VM : BaseViewModel<R>, R: Route> : Fragment() {
         return actualClass.kotlin
     }
 
-    protected fun <T> subscribe(liveData: LiveData<T>, onNext: (t: T?) -> Unit) {
+    protected fun <T> subscribe(liveData: (LiveData<T>)?, onNext: (t: T) -> Unit) {
+        liveData?.observe(viewLifecycleOwner, Observer {
+            if (it != null) {
+                onNext(it)
+            }
+        })
+    }
+
+    protected fun <T> subscribeNullable(liveData: LiveData<T>, onNext: (t: T?) -> Unit) {
         liveData.observe(viewLifecycleOwner, Observer { onNext(it) })
     }
 }

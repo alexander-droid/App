@@ -1,9 +1,12 @@
 package com.alex.droid.dev.app.api
 
-import com.alex.droid.dev.app.model.entity.post.PostEntity
+import com.alex.droid.dev.app.API_GET_POSTS
+import com.alex.droid.dev.app.model.api.response.ResponseFeed
 import io.reactivex.Single
+import retrofit2.http.GET
 
 interface FeedApi {
 
-    fun feedPage(filter: String?, lastId: String?): Single<List<PostEntity>>
+    @GET(API_GET_POSTS)
+    fun feedPage(limit: Int?, offset: Int?): Single<ResponseFeed>
 }
