@@ -1,4 +1,4 @@
-package com.alex.droid.dev.app.repository
+package com.alex.droid.dev.app.usecase
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
@@ -19,11 +19,12 @@ interface FeedUseCase {
     fun feed(query: String): PagingData<Post>
 }
 
-class FeedUseCaseImpl(private val feedApi: FeedApi): FeedUseCase {
+class FeedUseCaseImpl(private val feedApi: FeedApi) : FeedUseCase {
 
     override fun feed(query: String): PagingData<Post> {
 
-        val sourceFactory = DataSourceFactory(feedApi)
+        val sourceFactory =
+            DataSourceFactory(feedApi)
         val livePagedList = sourceFactory.toLiveData(
             config = PagedList.Config.Builder()
                 .setPageSize(30)
@@ -63,7 +64,7 @@ class DataSourceFactory(private val feedApi: FeedApi) : DataSource.Factory<Int, 
 
 class FeedDataSource(
     private val feedApi: FeedApi
-): PositionalDataSource<Post>() {
+) : PositionalDataSource<Post>() {
 
     val loadingState = MutableLiveData<LoadingState>()
 

@@ -18,7 +18,7 @@ abstract class BaseViewModel<R: Route> : ViewModel(), LifecycleObserver {
 
     @CallSuper
     open fun onCreate() {
-        isNew = false
+
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
@@ -38,7 +38,7 @@ abstract class BaseViewModel<R: Route> : ViewModel(), LifecycleObserver {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     open fun onDestroyView() {
-
+        isNew = false
     }
 
     @CallSuper

@@ -2,8 +2,8 @@ package com.alex.droid.dev.app
 
 import com.alex.droid.dev.app.api.FeedApi
 import com.alex.droid.dev.app.base.EmptyViewModel
-import com.alex.droid.dev.app.repository.FeedUseCase
-import com.alex.droid.dev.app.repository.FeedUseCaseImpl
+import com.alex.droid.dev.app.usecase.FeedUseCase
+import com.alex.droid.dev.app.usecase.FeedUseCaseImpl
 import com.alex.droid.dev.app.ui.feed.FeedViewModel
 import com.alex.droid.dev.app.ui.feed.FeedViewModelImpl
 import com.alex.droid.dev.app.ui.post.PostViewModel

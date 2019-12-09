@@ -9,7 +9,7 @@ import com.alex.droid.dev.app.base.BaseViewModel
 import com.alex.droid.dev.app.model.data.post.Post
 import com.alex.droid.dev.app.model.routes.FeedRoute
 import com.alex.droid.dev.app.paging.LoadingState
-import com.alex.droid.dev.app.repository.FeedUseCase
+import com.alex.droid.dev.app.usecase.FeedUseCase
 
 abstract class FeedViewModel: BaseViewModel<FeedRoute>() {
     abstract fun refresh()
