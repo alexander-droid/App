@@ -17,6 +17,7 @@ import com.alex.droid.dev.app.paging.LoadingState
 import com.alex.droid.dev.app.paging.Status
 import kotlinx.android.synthetic.main.fragment_feed.*
 import kotlinx.android.synthetic.main.item_post.view.*
+import timber.log.Timber
 
 class FeedFragment : BaseFragment<FeedViewModel, FeedRoute>() {
 
@@ -28,6 +29,7 @@ class FeedFragment : BaseFragment<FeedViewModel, FeedRoute>() {
         recycler_view.adapter = adapter
 
         subscribe(viewModel.feedLiveData) {
+            Timber.d("feedLiveData ${it.size}")
             adapter.submitList(it)
         }
 
@@ -64,6 +66,7 @@ class GifViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun bind(post: Post) {
         avatarImage.loadImage(post.image)
+        itemView.message_tv.text = post.message
     }
 }
 

@@ -27,7 +27,7 @@ class FeedUseCaseImpl(private val feedApi: FeedApi) : FeedUseCase {
             DataSourceFactory(feedApi)
         val livePagedList = sourceFactory.toLiveData(
             config = PagedList.Config.Builder()
-                .setPageSize(30)
+                .setPageSize(1)
                 .setEnablePlaceholders(false)
                 .build()
         )
@@ -80,7 +80,7 @@ class FeedDataSource(
     }
 
     override fun loadInitial(params: LoadInitialParams, callback: LoadInitialCallback<Post>) {
-
+        Timber.d("loadInitial")
         loadingState.postValue(LoadingState.LOADING)
         initialLoad.postValue(LoadingState.LOADING)
 
@@ -91,7 +91,7 @@ class FeedDataSource(
                 retry = null
                 loadingState.postValue(LoadingState.LOADED)
                 initialLoad.postValue(LoadingState.LOADED)
-                callback.onResult(it.data, 0)
+                callback.onResult(it.list, 0)
             }, {
                 Timber.e(it)
                 retry = { loadInitial(params, callback) }
@@ -101,7 +101,7 @@ class FeedDataSource(
     }
 
     override fun loadRange(params: LoadRangeParams, callback: LoadRangeCallback<Post>) {
-
+        Timber.d("loadRange")
         loadingState.postValue(LoadingState.LOADING)
 
         disposable?.dispose()
@@ -110,7 +110,7 @@ class FeedDataSource(
             .subscribe({
                 retry = null
                 loadingState.postValue(LoadingState.LOADED)
-                callback.onResult(it.data)
+                callback.onResult(it.list)
             }, {
                 Timber.e(it)
                 retry = { loadRange(params, callback) }

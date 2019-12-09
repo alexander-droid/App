@@ -10,6 +10,7 @@ import com.alex.droid.dev.app.model.data.post.Post
 import com.alex.droid.dev.app.model.routes.FeedRoute
 import com.alex.droid.dev.app.paging.LoadingState
 import com.alex.droid.dev.app.usecase.FeedUseCase
+import timber.log.Timber
 
 abstract class FeedViewModel: BaseViewModel<FeedRoute>() {
     abstract fun refresh()
@@ -30,7 +31,12 @@ class FeedViewModelImpl(
     override val loadingState = pagingLiveData.switchMap { it.loadingState }
     override val refreshState = pagingLiveData.switchMap { it.refreshState }
 
+    init {
+        queryLiveData.value = ""
+    }
+
     override fun refresh() {
+        Timber.d("refresh")
         pagingLiveData.value?.refresh?.invoke()
     }
 }

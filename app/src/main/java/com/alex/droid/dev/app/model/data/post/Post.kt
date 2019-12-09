@@ -12,6 +12,6 @@ data class Post(
     val video: String?,
     val image: String?,
     val date: String = DateUtils.currentTimeString(),
-    val user: User,
+    val user: User?,
     val isLiked: Boolean = false
 ): Parcelable
