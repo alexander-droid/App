@@ -12,7 +12,9 @@ import com.alex.droid.dev.app.R
 import com.alex.droid.dev.app.base.BaseFragment
 import com.alex.droid.dev.app.ext.loadImage
 import com.alex.droid.dev.app.model.data.post.Post
+import com.alex.droid.dev.app.model.routes.CreatePostRoute
 import com.alex.droid.dev.app.model.routes.FeedRoute
+import com.alex.droid.dev.app.model.routes.PostRoute
 import com.alex.droid.dev.app.paging.LoadingState
 import com.alex.droid.dev.app.paging.Status
 import kotlinx.android.synthetic.main.fragment_feed.*
@@ -29,7 +31,6 @@ class FeedFragment : BaseFragment<FeedViewModel, FeedRoute>() {
         recycler_view.adapter = adapter
 
         subscribe(viewModel.feedLiveData) {
-            Timber.d("feedLiveData ${it.size}")
             adapter.submitList(it)
         }
 
@@ -65,7 +66,6 @@ class GifViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val avatarImage = itemView.avatar_iv
 
     fun bind(post: Post) {
-        avatarImage.loadImage(post.image)
         itemView.message_tv.text = post.message
     }
 }

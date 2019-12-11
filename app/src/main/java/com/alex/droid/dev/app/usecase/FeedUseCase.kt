@@ -16,15 +16,14 @@ import io.reactivex.disposables.Disposable
 import timber.log.Timber
 
 interface FeedUseCase {
-    fun feed(query: String): PagingData<Post>
+    fun feed(): PagingData<Post>
 }
 
 class FeedUseCaseImpl(private val feedApi: FeedApi) : FeedUseCase {
 
-    override fun feed(query: String): PagingData<Post> {
+    override fun feed(): PagingData<Post> {
+        val sourceFactory = DataSourceFactory(feedApi)
 
-        val sourceFactory =
-            DataSourceFactory(feedApi)
         val livePagedList = sourceFactory.toLiveData(
             config = PagedList.Config.Builder()
                 .setPageSize(1)
@@ -35,18 +34,21 @@ class FeedUseCaseImpl(private val feedApi: FeedApi) : FeedUseCase {
         val refreshState = sourceFactory.sourceLiveData.switchMap {
             it.initialLoad
         }
+
+        val loadingState = sourceFactory.sourceLiveData.switchMap {
+            it.loadingState
+        }
+
         return PagingData(
             pagedList = livePagedList,
-            loadingState = Transformations.switchMap(sourceFactory.sourceLiveData) {
-                it.loadingState
-            },
+            loadingState = loadingState,
+            refreshState = refreshState,
             retry = {
                 sourceFactory.sourceLiveData.value?.retryAll()
             },
             refresh = {
                 sourceFactory.sourceLiveData.value?.invalidate()
-            },
-            refreshState = refreshState
+            }
         )
     }
 }

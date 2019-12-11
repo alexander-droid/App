@@ -2,15 +2,14 @@ package com.alex.droid.dev.app.ui.feed
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.map
 import androidx.lifecycle.switchMap
 import androidx.paging.PagedList
 import com.alex.droid.dev.app.base.BaseViewModel
 import com.alex.droid.dev.app.model.data.post.Post
 import com.alex.droid.dev.app.model.routes.FeedRoute
 import com.alex.droid.dev.app.paging.LoadingState
+import com.alex.droid.dev.app.paging.PagingData
 import com.alex.droid.dev.app.usecase.FeedUseCase
-import timber.log.Timber
 
 abstract class FeedViewModel: BaseViewModel<FeedRoute>() {
     abstract fun refresh()
@@ -19,24 +18,15 @@ abstract class FeedViewModel: BaseViewModel<FeedRoute>() {
     abstract val refreshState: LiveData<LoadingState>
 }
 
-class FeedViewModelImpl(
-    private val reedUseCase: FeedUseCase
-): FeedViewModel() {
+class FeedViewModelImpl(reedUseCase: FeedUseCase): FeedViewModel() {
 
-    private val queryLiveData = MutableLiveData<String>()
-
-    private val pagingLiveData = queryLiveData.map { reedUseCase.feed(it) }
+    private val pagingLiveData = MutableLiveData<PagingData<Post>>(reedUseCase.feed())
 
     override val feedLiveData = pagingLiveData.switchMap { it.pagedList }
     override val loadingState = pagingLiveData.switchMap { it.loadingState }
     override val refreshState = pagingLiveData.switchMap { it.refreshState }
 
-    init {
-        queryLiveData.value = ""
-    }
-
     override fun refresh() {
-        Timber.d("refresh")
         pagingLiveData.value?.refresh?.invoke()
     }
 }

@@ -34,7 +34,7 @@ abstract class BaseFragment<VM : BaseViewModel<R>, R: Route> : Fragment() {
         super.onCreate(savedInstanceState)
 
         viewModel = getKoin().getViewModel(
-            ViewModelParameters<VM>(
+            ViewModelParameters(
                 clazz = getViewModelKClass(),
                 owner = this
             )

@@ -1,4 +1,4 @@
-package com.alex.droid.dev.app.ui.splash
+package com.alex.droid.dev.app
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,7 +10,8 @@ import androidx.ui.core.setContent
 import androidx.ui.layout.Wrap
 import androidx.ui.material.MaterialTheme
 import androidx.ui.tooling.preview.Preview
-import com.alex.droid.dev.app.MainActivity
+import com.alex.droid.dev.app.model.data.post.Post
+import timber.log.Timber
 
 class SplashActivity : AppCompatActivity() {
 
@@ -19,7 +20,6 @@ class SplashActivity : AppCompatActivity() {
         setContent {
             Greeting("Android")
         }
-
         startActivity(Intent(this@SplashActivity, MainActivity::class.java))
         finish()
     }

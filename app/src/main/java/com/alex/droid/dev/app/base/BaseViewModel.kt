@@ -16,7 +16,6 @@ abstract class BaseViewModel<R: Route> : ViewModel(), LifecycleObserver {
 
     lateinit var router: Router
 
-    @CallSuper
     open fun onCreate() {
 
     }
@@ -37,11 +36,11 @@ abstract class BaseViewModel<R: Route> : ViewModel(), LifecycleObserver {
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+    @CallSuper
     open fun onDestroyView() {
         isNew = false
     }
 
-    @CallSuper
     override fun onCleared() {
 
     }

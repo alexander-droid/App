@@ -1,22 +1,17 @@
 package com.alex.droid.dev.app
 
 import android.app.Application
-import android.util.Log
-import androidx.lifecycle.asLiveData
 import com.facebook.stetho.Stetho
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import org.koin.android.ext.android.getKoin
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import timber.log.Timber
-import java.net.ConnectException
 
 class App: Application() {
 
     override fun onCreate() {
         super.onCreate()
-        Stetho.initializeWithDefaults(this);
+        Stetho.initializeWithDefaults(this)
         initTimber()
         startKoin()
     }

@@ -6,6 +6,8 @@ import com.alex.droid.dev.app.usecase.FeedUseCase
 import com.alex.droid.dev.app.usecase.FeedUseCaseImpl
 import com.alex.droid.dev.app.ui.feed.FeedViewModel
 import com.alex.droid.dev.app.ui.feed.FeedViewModelImpl
+import com.alex.droid.dev.app.ui.feed.create.CreatePostViewModel
+import com.alex.droid.dev.app.ui.feed.create.CreatePostViewModelImpl
 import com.alex.droid.dev.app.ui.post.PostViewModel
 import com.alex.droid.dev.app.ui.post.PostViewModelImpl
 import com.google.gson.GsonBuilder
@@ -24,6 +26,7 @@ private val viewModelModule = module {
     viewModel { EmptyViewModel() }
     viewModel { FeedViewModelImpl(get()) as FeedViewModel }
     viewModel { PostViewModelImpl() as PostViewModel }
+    viewModel { CreatePostViewModelImpl() as CreatePostViewModel }
 }
 
 private val appModule = module {

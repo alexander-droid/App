@@ -18,7 +18,6 @@ class PostViewModelImpl(): PostViewModel() {
     override val postLiveData = MutableLiveData<Post>()
 
     override fun onCreate() {
-        super.onCreate()
         postLiveData.value = route?.post
 
 

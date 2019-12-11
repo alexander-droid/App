@@ -1,17 +1,23 @@
 package com.alex.droid.dev.app
 
 import android.os.Bundle
+import android.view.View
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.alex.droid.dev.app.base.BaseActivity
 import com.alex.droid.dev.app.base.EmptyViewModel
+import com.alex.droid.dev.app.model.data.post.Post
 import com.alex.droid.dev.app.model.routes.*
 import com.alex.droid.dev.app.ui.chat.ChatFragment
 import com.alex.droid.dev.app.ui.contacts.ContactsFragment
 import com.alex.droid.dev.app.ui.feed.FeedFragment
+import com.alex.droid.dev.app.ui.feed.create.CreatePostFragment
 import com.alex.droid.dev.app.ui.post.PostFragment
 import com.alex.droid.dev.app.ui.search.SearchFragment
 import com.alex.droid.dev.router.EmptyRoute
 import com.alex.droid.dev.router.RoutesBuilder
 import kotlinx.android.synthetic.main.activity_main.*
+import timber.log.Timber
 
 class MainActivity : BaseActivity<EmptyViewModel, EmptyRoute>() {
 
@@ -20,12 +26,34 @@ class MainActivity : BaseActivity<EmptyViewModel, EmptyRoute>() {
         route(ContactsRoute::class to ContactsFragment::class)
         route(SearchRoute::class to SearchFragment::class)
         route(PostRoute::class to PostFragment::class)
+        route(CreatePostRoute::class to CreatePostFragment::class)
         route(ChatRoute::class to ChatFragment::class)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        supportFragmentManager.registerFragmentLifecycleCallbacks(object : FragmentManager.FragmentLifecycleCallbacks() {
+            override fun onFragmentViewCreated(fm: FragmentManager, f: Fragment, v: View, savedInstanceState: Bundle?) {
+                when (f) {
+                    is FeedFragment,
+                    is ContactsFragment,
+                    is SearchFragment -> {
+                        bar.animate().translationY(0f)
+                        add_btn.show()
+                    }
+                    else -> {
+                        bar.animate().translationY(bar.height.toFloat())
+                        add_btn.hide()
+                    }
+                }
+            }
+        }, false)
+
+        add_btn.setOnClickListener {
+            router.replaceWithStack(CreatePostRoute(), "main")
+        }
 
         bar.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
