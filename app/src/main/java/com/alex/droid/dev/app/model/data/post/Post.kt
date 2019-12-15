@@ -12,7 +12,7 @@ data class Post(
     val message: String?,
     val video: String?,
     val address: Address?,
-    val images: List<String>?,
+    val image: String?,
     val date: String = DateUtils.currentTimeString(),
     val user: User?,
     val isLiked: Boolean = false

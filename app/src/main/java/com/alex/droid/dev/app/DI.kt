@@ -4,12 +4,11 @@ import com.alex.droid.dev.app.api.FeedApi
 import com.alex.droid.dev.app.base.EmptyViewModel
 import com.alex.droid.dev.app.usecase.FeedUseCase
 import com.alex.droid.dev.app.usecase.FeedUseCaseImpl
-import com.alex.droid.dev.app.ui.feed.FeedViewModel
-import com.alex.droid.dev.app.ui.feed.FeedViewModelImpl
-import com.alex.droid.dev.app.ui.feed.create.CreatePostViewModel
-import com.alex.droid.dev.app.ui.feed.create.CreatePostViewModelImpl
-import com.alex.droid.dev.app.ui.post.PostViewModel
-import com.alex.droid.dev.app.ui.post.PostViewModelImpl
+import com.alex.droid.dev.app.ui.post.feed.FeedViewModel
+import com.alex.droid.dev.app.ui.post.feed.FeedViewModelImpl
+import com.alex.droid.dev.app.ui.post.create.CreatePostViewModel
+import com.alex.droid.dev.app.ui.post.detail.PostViewModel
+import com.alex.droid.dev.app.ui.post.detail.PostViewModelImpl
 import com.google.gson.GsonBuilder
 import com.ihsanbal.logging.Level
 import com.ihsanbal.logging.LoggingInterceptor
@@ -26,7 +25,7 @@ private val viewModelModule = module {
     viewModel { EmptyViewModel() }
     viewModel { FeedViewModelImpl(get()) as FeedViewModel }
     viewModel { PostViewModelImpl() as PostViewModel }
-    viewModel { CreatePostViewModelImpl() as CreatePostViewModel }
+    viewModel { CreatePostViewModel() }
 }
 
 private val appModule = module {

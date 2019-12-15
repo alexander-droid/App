@@ -1,4 +1,4 @@
-package com.alex.droid.dev.app.ui.feed
+package com.alex.droid.dev.app.ui.post.feed
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,16 +10,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.alex.droid.dev.app.R
 import com.alex.droid.dev.app.base.BaseFragment
-import com.alex.droid.dev.app.ext.loadImage
 import com.alex.droid.dev.app.model.data.post.Post
-import com.alex.droid.dev.app.model.routes.CreatePostRoute
 import com.alex.droid.dev.app.model.routes.FeedRoute
-import com.alex.droid.dev.app.model.routes.PostRoute
 import com.alex.droid.dev.app.paging.LoadingState
 import com.alex.droid.dev.app.paging.Status
 import kotlinx.android.synthetic.main.fragment_feed.*
 import kotlinx.android.synthetic.main.item_post.view.*
-import timber.log.Timber
 
 class FeedFragment : BaseFragment<FeedViewModel, FeedRoute>() {
 
@@ -36,7 +32,7 @@ class FeedFragment : BaseFragment<FeedViewModel, FeedRoute>() {
 
         subscribe(viewModel.loadingState) {
             if (it.status == Status.FAILED) {
-                Toast.makeText(context, it.msg, Toast.LENGTH_SHORT).show()
+//                Toast.makeText(context, it.msg, Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -50,7 +46,9 @@ class FeedFragment : BaseFragment<FeedViewModel, FeedRoute>() {
     }
 }
 
-class FeedAdapter : PagedListAdapter<Post, GifViewHolder>(DiffUtilCallBack()) {
+class FeedAdapter : PagedListAdapter<Post, GifViewHolder>(
+    DiffUtilCallBack()
+) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GifViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_post, parent, false)

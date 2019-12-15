@@ -1,10 +1,7 @@
-package com.alex.droid.dev.app.ui.post
+package com.alex.droid.dev.app.ui.post.detail
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 
 import com.alex.droid.dev.app.R
 import com.alex.droid.dev.app.base.BaseFragment

@@ -1,4 +1,4 @@
-package com.alex.droid.dev.app.ui.post
+package com.alex.droid.dev.app.ui.post.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

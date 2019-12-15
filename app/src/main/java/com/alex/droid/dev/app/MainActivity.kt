@@ -6,18 +6,16 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.alex.droid.dev.app.base.BaseActivity
 import com.alex.droid.dev.app.base.EmptyViewModel
-import com.alex.droid.dev.app.model.data.post.Post
 import com.alex.droid.dev.app.model.routes.*
 import com.alex.droid.dev.app.ui.chat.ChatFragment
 import com.alex.droid.dev.app.ui.contacts.ContactsFragment
-import com.alex.droid.dev.app.ui.feed.FeedFragment
-import com.alex.droid.dev.app.ui.feed.create.CreatePostFragment
-import com.alex.droid.dev.app.ui.post.PostFragment
+import com.alex.droid.dev.app.ui.post.feed.FeedFragment
+import com.alex.droid.dev.app.ui.post.create.CreatePostFragment
+import com.alex.droid.dev.app.ui.post.detail.PostFragment
 import com.alex.droid.dev.app.ui.search.SearchFragment
 import com.alex.droid.dev.router.EmptyRoute
 import com.alex.droid.dev.router.RoutesBuilder
 import kotlinx.android.synthetic.main.activity_main.*
-import timber.log.Timber
 
 class MainActivity : BaseActivity<EmptyViewModel, EmptyRoute>() {
 
