@@ -21,10 +21,7 @@ import com.google.android.libraries.places.api.model.TypeFilter
 import com.google.android.libraries.places.widget.Autocomplete
 import com.google.android.libraries.places.widget.AutocompleteActivity
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
-import kotlinx.android.synthetic.main.fragment_create_post.*
 import timber.log.Timber
-import java.util.*
-
 
 class CreatePostFragment : BaseFragment<CreatePostViewModel, CreatePostRoute>() {
 
@@ -60,7 +57,7 @@ class CreatePostFragment : BaseFragment<CreatePostViewModel, CreatePostRoute>() 
             }
 
             // Set the fields to specify which types of place data to return.
-            val fields: List<Place.Field> = Arrays.asList(Place.Field.LAT_LNG, Place.Field.NAME, Place.Field.ADDRESS)
+            val fields: List<Place.Field> = listOf(Place.Field.LAT_LNG, Place.Field.NAME, Place.Field.ADDRESS)
 
             // Start the autocomplete intent.
             val intent: Intent = Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields)

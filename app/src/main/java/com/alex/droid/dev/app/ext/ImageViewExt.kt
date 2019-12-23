@@ -9,3 +9,10 @@ fun ImageView.loadImage(path: String?) {
         .transition(DrawableTransitionOptions().crossFade())
         .into(this)
 }
+
+fun ImageView.loadAvatar(path: String?) {
+    Glide.with(this).load(path)
+        .transition(DrawableTransitionOptions().crossFade())
+        .circleCrop()
+        .into(this)
+}

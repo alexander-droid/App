@@ -1,6 +1,9 @@
 package com.alex.droid.dev.app.usecase
 
-abstract class BaseUseCase<Action, Data>() {
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 
-    abstract fun execute(action: Action): Data
+interface BaseUseCase<Action, Data> {
+    suspend fun async(action: Action): Deferred<Data>
 }

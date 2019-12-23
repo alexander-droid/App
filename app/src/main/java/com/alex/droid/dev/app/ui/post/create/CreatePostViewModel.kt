@@ -1,17 +1,27 @@
 package com.alex.droid.dev.app.ui.post.create
 
-import android.os.Handler
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.map
+import androidx.lifecycle.viewModelScope
 import com.alex.droid.dev.app.R
 import com.alex.droid.dev.app.base.BaseViewModel
 import com.alex.droid.dev.app.ext.clear
 import com.alex.droid.dev.app.livedata.SingleLiveEvent
+import com.alex.droid.dev.app.model.api.request.RequestCreatePost
 import com.alex.droid.dev.app.model.data.Address
+import com.alex.droid.dev.app.model.data.post.Privacy
 import com.alex.droid.dev.app.model.routes.CreatePostRoute
+import com.alex.droid.dev.app.usecase.CreatePostUseCase
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
-class CreatePostViewModel() : BaseViewModel<CreatePostRoute>() {
+class CreatePostViewModel(private val createPostUseCase: CreatePostUseCase) : BaseViewModel<CreatePostRoute>() {
+
+    private val handler = CoroutineExceptionHandler { _, exception ->
+        Timber.v(exception)
+    }
+
+    val isEditModeLiveData = MutableLiveData<Boolean>()
 
     val messageLiveData = MutableLiveData<String>()
     val imageLiveData = MutableLiveData<String>()
@@ -23,14 +33,18 @@ class CreatePostViewModel() : BaseViewModel<CreatePostRoute>() {
     val onSelectLocation = SingleLiveEvent<Address>()
 
     override fun onCreate() {
-        //        messageLiveData.value = route?.post?.message
-        Handler().postDelayed({ privacyLiveData.value = R.id.post_friends }, 3000)
-        imageLiveData.value = route?.post?.image
-//        videoLiveData.value = route?.post?.video
-//        addressLiveData.value = route?.post?.address
+        val post = route?.post
 
-        privacyLiveData.observeForever {
-            Timber.d("privacyLiveData $it")
+        isEditModeLiveData.value = post != null
+
+        messageLiveData.value = post?.message
+        imageLiveData.value = post?.image
+        addressLiveData.value = post?.address
+        privacyLiveData.value = when(post?.privacy) {
+            Privacy.PUBLIC -> R.id.privacy_public
+            Privacy.FRIENDS -> R.id.privacy_friends
+            Privacy.PRIVATE -> R.id.privacy_private
+            null -> null
         }
     }
 
@@ -51,6 +65,22 @@ class CreatePostViewModel() : BaseViewModel<CreatePostRoute>() {
     }
 
     fun onDoneClicked() {
-        Timber.d("Done ${messageLiveData.value}")
+        viewModelScope.launch(handler) {
+            Timber.tag("MyCorTest").d("launch")
+            createPostUseCase.async(
+                RequestCreatePost(
+                    message = messageLiveData.value,
+                    address = addressLiveData.value,
+                    privacy = when(privacyLiveData.value) {
+                        R.id.privacy_public -> Privacy.PUBLIC
+                        R.id.privacy_friends -> Privacy.FRIENDS
+                        R.id.privacy_private -> Privacy.PRIVATE
+                        else -> null
+                    }
+                )
+            ).await()
+
+            Timber.tag("MyCorTest").d("launch success")
+        }
     }
 }

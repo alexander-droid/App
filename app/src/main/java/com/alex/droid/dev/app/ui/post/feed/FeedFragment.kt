@@ -23,7 +23,7 @@ class FeedFragment : BaseFragment<FeedViewModel, FeedRoute>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        val adapter = FeedAdapter()
+        val adapter = FeedAdapter(viewModel)
         recycler_view.adapter = adapter
 
         subscribe(viewModel.feedLiveData) {
@@ -43,37 +43,5 @@ class FeedFragment : BaseFragment<FeedViewModel, FeedRoute>() {
         swipe_refresh.setOnRefreshListener {
             viewModel.refresh()
         }
-    }
-}
-
-class FeedAdapter : PagedListAdapter<Post, GifViewHolder>(
-    DiffUtilCallBack()
-) {
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GifViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_post, parent, false)
-        return GifViewHolder(view)
-    }
-
-    override fun onBindViewHolder(holder: GifViewHolder, position: Int) {
-        getItem(position)?.also { holder.bind(it) }
-    }
-}
-
-class GifViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    private val avatarImage = itemView.avatar_iv
-
-    fun bind(post: Post) {
-        itemView.message_tv.text = post.message
-    }
-}
-
-class DiffUtilCallBack : DiffUtil.ItemCallback<Post>() {
-    override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean {
-        return oldItem.id == newItem.id
-    }
-
-    override fun areContentsTheSame(oldItem: Post, newItem: Post): Boolean {
-        return oldItem == newItem
     }
 }

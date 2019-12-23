@@ -35,9 +35,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
-    dataBinding {
-        isEnabled = true
-    }
+    dataBinding.isEnabled = true
 }
 
 tasks {
@@ -68,10 +66,11 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.6.1")
     implementation("com.squareup.retrofit2:converter-gson:2.6.1")
     implementation("com.squareup.retrofit2:adapter-rxjava2:2.6.0")
+    implementation("com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2")
     implementation("io.reactivex.rxjava2:rxjava:2.2.13")
     implementation("io.reactivex.rxjava2:rxandroid:2.1.1")
 
-    implementation("com.google.android.libraries.places:places:2.0.0")
+    implementation("com.google.android.libraries.places:places:2.1.0")
 
     implementation("com.jakewharton.timber:timber:4.7.1")
 
@@ -99,7 +98,6 @@ dependencies {
 
     implementation("com.facebook.stetho:stetho:1.5.1")
 
-    implementation("androidx.legacy:legacy-support-v4:1.0.0")
     testImplementation("junit:junit:4.12")
     testImplementation("androidx.arch.core:core-testing:2.1.0")
     testImplementation("org.mockito:mockito-core:3.1.0")

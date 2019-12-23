@@ -39,7 +39,7 @@
                     android:gravity="bottom|start"
                     android:minLines="3"
                     android:padding="16dp"
-                    android:hint="Type your thoughts..."
+                    android:hint="Type something..."
                     android:text="@={viewmodel.messageLiveData}"
                     app:layout_constraintBottom_toTopOf="@+id/media_container"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -172,19 +172,19 @@
                     app:layout_constraintStart_toStartOf="parent">
 
                     <com.google.android.material.radiobutton.MaterialRadioButton
-                        android:id="@+id/post_public"
+                        android:id="@+id/privacy_public"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Public" />
 
                     <RadioButton
-                        android:id="@+id/post_friends"
+                        android:id="@+id/privacy_friends"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Friends" />
 
                     <RadioButton
-                        android:id="@+id/post_private"
+                        android:id="@+id/privacy_private"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Private" />
@@ -203,7 +203,8 @@
             android:insetTop="0dp"
             android:insetBottom="0dp"
             android:onClick="@{() -> viewmodel.onDoneClicked()}"
-            android:text="Create"
+            android:text="@{viewmodel.isEditModeLiveData ? @string/update : @string/create}"
+            tools:text="Create"
             app:cornerRadius="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

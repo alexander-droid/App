@@ -6,6 +6,6 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class PostRoute(
-    val id: String? = null,
+    val id: Long? = null,
     val post: Post? = null
 ): Route
