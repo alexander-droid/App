@@ -18,7 +18,7 @@ import timber.log.Timber
 class CreatePostViewModel(private val createPostUseCase: CreatePostUseCase) : BaseViewModel<CreatePostRoute>() {
 
     private val handler = CoroutineExceptionHandler { _, exception ->
-        Timber.v(exception)
+        Timber.tag("MyCorTest").e(exception, "My exc")
     }
 
     val isEditModeLiveData = MutableLiveData<Boolean>()
@@ -67,7 +67,7 @@ class CreatePostViewModel(private val createPostUseCase: CreatePostUseCase) : Ba
     fun onDoneClicked() {
         viewModelScope.launch(handler) {
             Timber.tag("MyCorTest").d("launch")
-            createPostUseCase.async(
+            createPostUseCase.run(
                 RequestCreatePost(
                     message = messageLiveData.value,
                     address = addressLiveData.value,
@@ -78,7 +78,7 @@ class CreatePostViewModel(private val createPostUseCase: CreatePostUseCase) : Ba
                         else -> null
                     }
                 )
-            ).await()
+            )
 
             Timber.tag("MyCorTest").d("launch success")
         }

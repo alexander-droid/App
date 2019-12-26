@@ -14,19 +14,19 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
-            android:name="com.alex.droid.dev.app.ui.auth.login.LoginActivity"
-            android:label="@string/title_activity_login"/>
+            android:name="com.alex.droid.dev.app.ui.auth.login.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".SplashActivity"
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

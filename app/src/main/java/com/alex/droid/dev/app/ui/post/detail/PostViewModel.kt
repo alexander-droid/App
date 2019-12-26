@@ -28,7 +28,7 @@ class PostViewModelImpl(private val getPostUseCase: GetPostUseCase): PostViewMod
         if (id != null) {
             viewModelScope.launch {
                 Timber.tag("MyCorTest").v("launch")
-                val post = getPostUseCase.async(RequestGetPost(id)).await().post
+                val post = getPostUseCase.run(RequestGetPost(id)).post
                 Timber.tag("MyCorTest").v("launch success")
                 postLiveData.value = post
             }

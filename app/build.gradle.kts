@@ -7,6 +7,7 @@ plugins {
     kotlin("kapt")
     id("kotlin-android")
     id("kotlin-android-extensions")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -66,7 +67,6 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.6.1")
     implementation("com.squareup.retrofit2:converter-gson:2.6.1")
     implementation("com.squareup.retrofit2:adapter-rxjava2:2.6.0")
-    implementation("com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2")
     implementation("io.reactivex.rxjava2:rxjava:2.2.13")
     implementation("io.reactivex.rxjava2:rxandroid:2.1.1")
 
@@ -97,6 +97,8 @@ dependencies {
     implementation("androidx.ui:ui-tooling:0.1.0-dev02")
 
     implementation("com.facebook.stetho:stetho:1.5.1")
+
+    implementation("com.google.android.gms:play-services-auth:17.0.0")
 
     testImplementation("junit:junit:4.12")
     testImplementation("androidx.arch.core:core-testing:2.1.0")

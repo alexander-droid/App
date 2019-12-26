@@ -14,7 +14,6 @@ import com.alex.droid.dev.app.usecase.GetPostUseCase
 import com.google.gson.GsonBuilder
 import com.ihsanbal.logging.Level
 import com.ihsanbal.logging.LoggingInterceptor
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import okhttp3.internal.platform.Platform
@@ -36,8 +35,6 @@ private val appModule = module {
 
     factory { RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()) }
 
-    factory { CoroutineCallAdapterFactory() }
-
     factory {
         LoggingInterceptor.Builder()
             .loggable(BuildConfig.DEBUG)
@@ -58,7 +55,6 @@ private val appModule = module {
             .baseUrl(BASE_URL)
             .addConverterFactory(get<GsonConverterFactory>())
             .addCallAdapterFactory(get<RxJava2CallAdapterFactory>())
-            .addCallAdapterFactory(get<CoroutineCallAdapterFactory>())
             .client(get())
             .build()
     }

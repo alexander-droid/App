@@ -1,14 +1,10 @@
 package com.alex.droid.dev.app.api
 
-import com.alex.droid.dev.app.API_CREATE_POST
-import com.alex.droid.dev.app.API_DELETE_POST
-import com.alex.droid.dev.app.API_GET_POST
-import com.alex.droid.dev.app.API_GET_POSTS
+import com.alex.droid.dev.app.*
 import com.alex.droid.dev.app.model.api.request.RequestCreatePost
 import com.alex.droid.dev.app.model.api.response.ResponseFeed
 import com.alex.droid.dev.app.model.api.response.ResponsePost
 import io.reactivex.Single
-import kotlinx.coroutines.Deferred
 import retrofit2.http.*
 
 interface FeedApi {
@@ -17,11 +13,14 @@ interface FeedApi {
     fun feedPage(@Query("limit") limit: Int?, @Query("offset") offset: Int?): Single<ResponseFeed>
 
     @POST(API_CREATE_POST)
-    suspend fun createPostAsync(@Body body: RequestCreatePost): Deferred<Unit>
+    suspend fun createPost(@Body body: RequestCreatePost)
 
     @DELETE(API_DELETE_POST)
-    suspend fun deletePostAsync(@Path("id") id: Long): Deferred<Unit>
+    suspend fun deletePost(@Path("id") id: Long)
 
     @GET(API_GET_POST)
-    suspend fun getPostAsync(id: Long): Deferred<ResponsePost>
+    suspend fun getPost(id: Long): ResponsePost
+
+    @GET(API_TEST)
+    suspend fun test()
 }
