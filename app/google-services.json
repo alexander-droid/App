@@ -1,34 +1,42 @@
 {
   "project_info": {
-    "project_number": "511237741899",
-    "firebase_url": "https://myapp-262021.firebaseio.com",
-    "project_id": "myapp-262021",
-    "storage_bucket": "myapp-262021.appspot.com"
+    "project_number": "281371186986",
+    "firebase_url": "https://testapp-263307.firebaseio.com",
+    "project_id": "testapp-263307",
+    "storage_bucket": "testapp-263307.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:511237741899:android:18028c38ee878de0d69cce",
+        "mobilesdk_app_id": "1:281371186986:android:b5241f123009f53c24b053",
         "android_client_info": {
           "package_name": "com.alex.droid.dev.app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "511237741899-2e8s217mku5mpid5nrqufu6mispie48c.apps.googleusercontent.com",
+          "client_id": "281371186986-nc0rsfl403gi1p29of6m7tfe93counr2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.alex.droid.dev.app",
+            "certificate_hash": "8ee723a96ece81771102fc792be4843f1f857df1"
+          }
+        },
+        {
+          "client_id": "281371186986-bvaa5rvmr8rdibivnsgo71tasvvtg91h.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC5Wm4YqDJWQF-kOkaMKitZZGvHZ5iF6-0"
+          "current_key": "AIzaSyAYVX15ALOR3tDsUOh03rEEYaSbXjdGtOg"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "511237741899-2e8s217mku5mpid5nrqufu6mispie48c.apps.googleusercontent.com",
+              "client_id": "281371186986-bvaa5rvmr8rdibivnsgo71tasvvtg91h.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

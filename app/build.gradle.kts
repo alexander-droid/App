@@ -54,15 +54,15 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:${KotlinCompilerVersion.VERSION}")
     implementation("org.jetbrains.kotlin:kotlin-reflect:${KotlinCompilerVersion.VERSION}")
     implementation("androidx.appcompat:appcompat:1.1.0")
-    implementation("androidx.core:core-ktx:1.1.0")
-    implementation("androidx.browser:browser:1.0.0")
+    implementation("androidx.core:core-ktx:1.2.0")
+    implementation("androidx.browser:browser:1.2.0")
     implementation("androidx.constraintlayout:constraintlayout:1.1.3")
-    implementation("androidx.fragment:fragment-ktx:1.2.0-rc03")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0-rc03")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.2.0-rc03")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.2.0-rc03")
-    implementation ("androidx.lifecycle:lifecycle-extensions:2.1.0")
-    implementation("com.google.android.material:material:1.2.0-alpha02")
+    implementation("androidx.fragment:fragment-ktx:1.3.0-alpha01")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0-alpha01")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.0-alpha01")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.0-alpha01")
+    implementation ("androidx.lifecycle:lifecycle-extensions:2.2.0")
+    implementation("com.google.android.material:material:1.2.0-alpha05")
 
     implementation("com.squareup.retrofit2:retrofit:2.6.1")
     implementation("com.squareup.retrofit2:converter-gson:2.6.1")
@@ -70,7 +70,7 @@ dependencies {
     implementation("io.reactivex.rxjava2:rxjava:2.2.13")
     implementation("io.reactivex.rxjava2:rxandroid:2.1.1")
 
-    implementation("com.google.android.libraries.places:places:2.1.0")
+    implementation("com.google.android.libraries.places:places:2.2.0")
 
     implementation("com.jakewharton.timber:timber:4.7.1")
 
@@ -86,11 +86,11 @@ dependencies {
     implementation("androidx.exifinterface:exifinterface:1.1.0")
     kapt("com.github.bumptech.glide:compiler:4.10.0")
 
-    implementation("androidx.paging:paging-runtime-ktx:2.1.0")
+    implementation("androidx.paging:paging-runtime-ktx:2.1.1")
 
-    implementation("androidx.room:room-runtime:2.2.2")
-    implementation("androidx.room:room-ktx:2.2.2")
-    kapt("androidx.room:room-compiler:2.2.2")
+    implementation("androidx.room:room-runtime:2.2.4")
+    implementation("androidx.room:room-ktx:2.2.4")
+    kapt("androidx.room:room-compiler:2.2.4")
 
     implementation("androidx.ui:ui-layout:0.1.0-dev02")
     implementation("androidx.ui:ui-material:0.1.0-dev02")
